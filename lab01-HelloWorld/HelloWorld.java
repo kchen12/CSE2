@@ -25,5 +25,7 @@ public class HelloWorld{
         System.out.println("test");
         
         //test/testtest
+        int k = 8;
+        System.out.printf("k = %100.4f\n", (double)k);
     }
 }
