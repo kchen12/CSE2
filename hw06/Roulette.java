@@ -14,26 +14,26 @@ public class Roulette{
         int totalWin = 0;
         int profitCount = 0;
         double aveWin = 0;
-        while(simCounter <1000){
-            while(counter < 100){
+        while(simCounter <1000){  // run the simulation 1000 times
+            while(counter < 100){  // simulate the 1$ bet 100 times
                 int rouNum = (int)(Math.random()*37);
                 if(rouNum == uNum){
                     matches = matches + 1;
                 }
                 counter++;
             }
-            if(matches == 0){
+            if(matches == 0){  // find the number of times that you won nothing
                 noMatch = noMatch +1;
             }
-            if(matches >= 3){
+            if(matches >= 3){  // find the number of times you profited
                 profitCount = profitCount +1;
             }
             totalWin = totalWin + matches;
-            counter = 0;
-            matches = 0;
+            counter = 0;  // reset the counter
+            matches = 0;  // reset the number of matches
             simCounter++;
         }
-        int total = totalWin*36;
+        int total = totalWin*36;  // calculate the total profit
         aveWin = (totalWin/1000);
         System.out.println("Your number is: " +uNum);
         System.out.println("Your total profit is: " +total);
