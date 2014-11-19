@@ -105,9 +105,8 @@ public class PokerOdds{
       for(int i=0; i<5; i++){
           
         int card = (int)(Math.random()*(52-i));  // draw 5 cards
-        hand[i]=card;
-        int b = deck[51-i];
-        deck[hand[i]]=b;
+        hand[i]=deck[card];
+        deck[card]=deck[51-i];
         
       }
       
