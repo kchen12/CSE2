@@ -28,18 +28,18 @@ public class PokerHands{
             System.out.println();
             
             int[] frequency = new int[13];
-            frequency = combo(hand);
+            frequency = combo(hand);  // get the frequency array from combo()
             
             int[] counter = new int[5];
-            counter = freqCount(frequency);
+            counter = freqCount(frequency);  // get the counter array
             
             String result = evaluate(frequency, counter, hand);
             
-            System.out.println("This is a "+result);
+            System.out.println("This is a "+result);  // print result
                 
             }
             else{
-                return;
+                return;  // end program if user doesn't enter 'Y' or 'y'
             }
             
         }
@@ -48,6 +48,7 @@ public class PokerHands{
         
     }
     
+    // Brian Chen's method
     public static void showOneHand(int hand[]){
         
     	String suit[]={"Clubs:	", "Diamonds: ", "Hearts:   ", "Spades:   "};
@@ -67,11 +68,11 @@ public class PokerHands{
     	
     }
     
-    public static int[] getHand(){
+    public static int[] getHand(){  // this method gets the hand from the user
         
         Scanner scan = new Scanner(System.in);
         
-        int[] deck = new int[52];
+        int[] deck = new int[52];  // assign numbers to each card
         for(int i=0; i<deck.length; i++){
             deck[i]=i;
         }
@@ -80,20 +81,20 @@ public class PokerHands{
         
         for(int i=0; i<hand.length; i++){
             
-            hand[i]=-1;
+            hand[i]=-1;  // create a hand and set each card value to -1
             
         }
         int suit;
         int rank;
         int i=-1;
         
-        while(i<4){
+        while(i<4){  // this loop draws 5 cards
             
             System.out.print("Enter the suit: 'c', 'd', 'h', or 's'- ");
-            String suitInput = scan.next();
+            String suitInput = scan.next();  // get user input
             System.out.println();
             
-            switch(suitInput){
+            switch(suitInput){  // assign suit modulo number with switch statement
                 
                 case "c":
                     suit = 0;
@@ -118,16 +119,16 @@ public class PokerHands{
             }
             
             System.out.print("Enter one of 'a', 'k', 'q', 'j', '10', ...'2'- ");
-            String rankInput = scan.next();
+            String rankInput = scan.next();  // get user input for rank
             System.out.println();
             
-            switch(rankInput){
+            switch(rankInput){  // use switch statement to convert and store user input to desired value
                 
                 case "a":
                     rank = 0;
-                    i++;
-                    break;
-                case "k":
+                    i++;    // to ensure the draw doesn't count if user doesn't
+                    break;  // input correctly, only increment i if user inputs
+                case "k":   // correctly
                     rank = 1;
                     i++;
                     break;
@@ -185,7 +186,7 @@ public class PokerHands{
             
             boolean duplicate = false;
             for(int j=0; j<5; j++){
-                if(hand[i]==hand[j]){
+                if(hand[i]==hand[j]){  // find if user inputs repeated card
                     
                     if(i != j){
                         
@@ -196,7 +197,7 @@ public class PokerHands{
                 }
             }
             
-            if(duplicate){
+            if(duplicate){  // redraw if user repeats a card
                 
                 i--;
                 
@@ -208,40 +209,40 @@ public class PokerHands{
         
     }
     
-    public static int[] combo(int[] hand){
+    public static int[] combo(int[] hand){  // this loop gets the frequency of appearance of each card
         
-        int[] newHand = new int[5];
-        int[] frequency = new int[13];
-        
+        int[] newHand = new int[5];     // although hand[] is used as an input,
+        int[] frequency = new int[13];  // set it to a new array so hand[] doesn't
+                                        // get messed up
         for(int i=0; i<newHand.length; i++){
             
             newHand[i] = hand[i];
             
         }
         
-        for(int i=0; i<newHand.length; i++){
-            
+        for(int i=0; i<newHand.length; i++){  // modulate the newHand so we only
+                                              // care about the rank
             newHand[i]=(int)(newHand[i]%13);
             
         }
         
         for(int i=0; i<newHand.length; i++){
             
-            frequency[newHand[i]]++;
-            
+            frequency[newHand[i]]++;  // find the frequency of each rank with
+                                      // frequency array
         }
         
         return frequency;
         
     }
     
-    public static int[] freqCount(int[] frequency){
+    public static int[] freqCount(int[] frequency){  // this method gets an array that gives how many pairs, triplets, and quartets in the hand
         
         int[] counter = new int[5];
         
         for(int i=0; i<frequency.length; i++){
             
-            switch(frequency[i]){
+            switch(frequency[i]){  // use switch statement to obtain the pairs, triplets and quartets
                 
                 case 0:
                     counter[0]++;
@@ -267,9 +268,9 @@ public class PokerHands{
         
     }
     
-    public static String evaluate(int[] frequency, int[] counter, int[] hand){
+    public static String evaluate(int[] frequency, int[] counter, int[] hand){  // this method gives the highest combo of the hand
         
-        for(int j=0; j<hand.length; j++){
+        for(int j=0; j<hand.length; j++){  // get the suit of each card
                         
             hand[j]=(hand[j]/13);
                         
@@ -277,7 +278,7 @@ public class PokerHands{
         
         int k = hand[0];
         
-        switch(counter[2]){
+        switch(counter[2]){  // use counter[] to determine pairs, triplets and quartets
             
             case 1:
                 if(counter[3] == 0){
@@ -322,7 +323,7 @@ public class PokerHands{
                 if(i<=8){
                 
                     if(frequency[i]==1 && frequency[i+1]==1 && frequency[i+2]==1 && frequency[i+3]==1 && frequency[i+4]==1){
-                        
+                        // this statement determines straights
                         int l = 0;
                         
                         for(int j=0; j<hand.length; j++){
@@ -337,7 +338,7 @@ public class PokerHands{
                                 
                                 if(frequency[0]==1 && frequency[1]==1 && frequency[2]==1 && frequency[3]==1 && frequency[4]==1){
                                     
-                                    String result = "Royal Flush";
+                                    String result = "Royal Flush";  // combine straight and flush conditions to get royal flush
                                     return result;
                                     
                                 }
@@ -360,20 +361,20 @@ public class PokerHands{
             
             for(int j=0; j<hand.length; j++){
                 
-                if(hand[j]==k){
+                if(hand[j]==k){  // use k to check suits
                     l++;
                 }
                 
             }
                 
-            if(l==5){
+            if(l==5){  // 
                 
                 String result = "Flush";
                 return result;
                 
             }
             
-            else{
+            else{  // if no other pair exist, then it must be a high card
                 
                 String result = "High Card";
                 return result;
