@@ -13,47 +13,25 @@ public class PokerHands{
         Scanner scan = new Scanner(System.in);
         String yesNo;
         
-        while(true){
+        while(true){  // set a loop so that it always asks user to play or not
          
-            System.out.print("Enter 'y' or 'Y' to enter a(nother) hand- ");
-            yesNo = scan.next();
+            System.out.print("Enter 'y' or 'Y' to enter a(nother) hand- ");  // ask user to play or not
+            yesNo = scan.next();  // get input
             
-            if(yesNo.equals("Y") || yesNo.equals("y")){
+            if(yesNo.equals("Y") || yesNo.equals("y")){  // if yes, execute the program
                 
             int[] hand = new int[5];
-            hand = getHand();
+            hand = getHand();  // get hand from method
             
-            showOneHand(hand);
+            showOneHand(hand);  // display hand
             
             System.out.println();
             
             int[] frequency = new int[13];
             frequency = combo(hand);
             
-            for(int i=0; i<frequency.length; i++){
-                
-                System.out.print(frequency[i]+" ");
-                
-            }
-            
-            System.out.println();
-            
-            for(int i=0; i<5; i++){
-                System.out.print(hand[i]+" ");
-            }
-            
-            System.out.println();
-            
             int[] counter = new int[5];
             counter = freqCount(frequency);
-            
-            for(int i=0; i<counter.length; i++){
-                
-                System.out.print(counter[i]+" ");
-            
-            }
-            
-            System.out.println();
             
             String result = evaluate(frequency, counter, hand);
             
@@ -294,7 +272,6 @@ public class PokerHands{
         for(int j=0; j<hand.length; j++){
                         
             hand[j]=(hand[j]/13);
-            System.out.println(hand[j]);
                         
         }
         
@@ -385,7 +362,6 @@ public class PokerHands{
                 
                 if(hand[j]==k){
                     l++;
-                    System.out.println(l+" "+hand[j]+" "+k);
                 }
                 
             }
